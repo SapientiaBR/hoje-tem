@@ -5,7 +5,8 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
-import { Loader2, Zap } from 'lucide-react';
+import { Loader2 } from 'lucide-react';
+import logoHojeTem from '@/assets/logo-hoje-tem.png';
 
 export default function Auth() {
   const { user, loading, signIn, signUp } = useAuth();
@@ -58,10 +59,7 @@ export default function Auth() {
       <div className="flex-1 flex flex-col justify-center px-6 py-12">
         <div className="mx-auto w-full max-w-sm">
           <div className="text-center mb-8">
-            <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl gradient-primary mb-4">
-              <Zap className="w-8 h-8 text-primary-foreground" />
-            </div>
-            <h1 className="text-3xl font-bold text-gradient">HOJE TEM</h1>
+            <img src={logoHojeTem} alt="HOJE TEM" className="h-24 mx-auto mb-4" />
             <p className="text-muted-foreground mt-2">
               Seu rolê começa aqui.
             </p>
