@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
-import { Loader2, PartyPopper } from 'lucide-react';
+import { Loader2, Zap } from 'lucide-react';
 
 export default function Auth() {
   const { user, loading, signIn, signUp } = useAuth();
@@ -46,8 +46,8 @@ export default function Auth() {
       });
     } else if (!isLogin) {
       toast({
-        title: 'Conta criada!',
-        description: 'Bem-vindo ao Zé Rolê!',
+        title: 'Bora!',
+        description: 'Seu HOJE TEM tá pronto.',
       });
     }
     setSubmitting(false);
@@ -59,11 +59,11 @@ export default function Auth() {
         <div className="mx-auto w-full max-w-sm">
           <div className="text-center mb-8">
             <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl gradient-primary mb-4">
-              <PartyPopper className="w-8 h-8 text-primary-foreground" />
+              <Zap className="w-8 h-8 text-primary-foreground" />
             </div>
-            <h1 className="text-3xl font-bold text-gradient">Zé Rolê</h1>
+            <h1 className="text-3xl font-bold text-gradient">HOJE TEM</h1>
             <p className="text-muted-foreground mt-2">
-              {isLogin ? 'Entre na sua conta' : 'Crie sua conta'}
+              Seu rolê começa aqui.
             </p>
           </div>
 
