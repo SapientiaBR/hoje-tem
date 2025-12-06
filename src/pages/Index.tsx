@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import logoHojeTem from '@/assets/logo-hoje-tem.png';
 import { Navigate } from 'react-router-dom';
 import { useAuth } from '@/hooks/useAuth';
 import { useEventos, useCategorias, Filtros, Evento } from '@/hooks/useEventos';
@@ -188,9 +189,9 @@ export default function Index() {
 
   return (
     <div className="min-h-screen bg-background pb-20">
-      <header className="sticky top-0 z-40 glass border-b border-border px-4 py-3">
+      <header className="sticky top-0 z-40 glass border-b border-border px-4 py-2">
         <div className="flex items-center justify-between">
-          <h1 className="text-xl font-bold text-gradient">HOJE TEM</h1>
+          <img src={logoHojeTem} alt="HOJE TEM" className="h-12" />
           <CitySelector
             cidade={filtros.cidade}
             onCidadeChange={(cidade) => setFiltros({ ...filtros, cidade })}
