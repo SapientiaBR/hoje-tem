@@ -190,7 +190,7 @@ export default function Index() {
     <div className="min-h-screen bg-background pb-20">
       <header className="sticky top-0 z-40 glass border-b border-border px-4 py-3">
         <div className="flex items-center justify-between">
-          <h1 className="text-xl font-bold text-gradient">Zé Rolê</h1>
+          <h1 className="text-xl font-bold text-gradient">HOJE TEM</h1>
           <CitySelector
             cidade={filtros.cidade}
             onCidadeChange={(cidade) => setFiltros({ ...filtros, cidade })}
