@@ -64,35 +64,42 @@ export default function Index() {
   const eventosDestaque = eventos.filter(e => e.destaque);
 
   const renderExplorar = () => (
-    <div className="space-y-6">
-      <SearchBar
-        value={filtros.busca}
-        onChange={(busca) => setFiltros({ ...filtros, busca })}
-        onFilterClick={() => setFilterOpen(true)}
-      />
-      <CategoryPills
-        categorias={categorias}
-        selected={filtros.categoria}
-        onSelect={(categoria) => setFiltros({ ...filtros, categoria })}
-      />
+    <div className="space-y-5">
+      {/* Destaques - Carrossel horizontal */}
       {eventosDestaque.length > 0 && filtros.categoria === 'Todos' && !filtros.busca && (
-        <section>
-          <h2 className="text-lg font-bold text-foreground mb-3">🔥 Em destaque</h2>
-          <div className="grid gap-4">
-            {eventosDestaque.slice(0, 3).map(evento => (
+        <section className="-mx-4">
+          <h2 className="text-lg font-bold text-foreground mb-3 px-4 flex items-center gap-2">
+            <span className="text-xl">🔥</span> DESTAQUES
+          </h2>
+          <div className="flex gap-3 overflow-x-auto px-4 pb-2 scrollbar-hide">
+            {eventosDestaque.map(evento => (
               <EventCard
                 key={evento.id}
                 evento={evento}
                 isFavorito={isFavorito(evento.id)}
                 onToggleFavorito={() => toggleFavorito(evento.id)}
                 onClick={() => setSelectedEvento(evento)}
+                variant="featured"
               />
             ))}
           </div>
         </section>
       )}
+
+      <SearchBar
+        value={filtros.busca}
+        onChange={(busca) => setFiltros({ ...filtros, busca })}
+        onFilterClick={() => setFilterOpen(true)}
+      />
+      
+      <CategoryPills
+        categorias={categorias}
+        selected={filtros.categoria}
+        onSelect={(categoria) => setFiltros({ ...filtros, categoria })}
+      />
+
       <section>
-        <h2 className="text-lg font-bold text-foreground mb-3">
+        <h2 className="text-base font-bold text-foreground mb-3">
           {filtros.busca || filtros.categoria !== 'Todos' ? 'Resultados' : 'Todos os eventos'}
         </h2>
         {eventosLoading ? (
@@ -104,7 +111,7 @@ export default function Index() {
             <p className="text-muted-foreground">Nenhum evento encontrado</p>
           </div>
         ) : (
-          <div className="grid gap-4">
+          <div className="grid grid-cols-2 gap-3">
             {eventos.map(evento => (
               <EventCard
                 key={evento.id}
@@ -132,7 +139,7 @@ export default function Index() {
           <p className="text-muted-foreground">Você ainda não salvou nenhum evento</p>
         </div>
       ) : (
-        <div className="grid gap-4">
+        <div className="grid grid-cols-2 gap-3">
           {eventosFavoritos.map(evento => (
             <EventCard
               key={evento.id}

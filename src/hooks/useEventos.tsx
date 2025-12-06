@@ -101,6 +101,12 @@ export function useCategorias() {
     'Eventos de Rua',
     'Exposições',
     'Esportes',
-    'Infantil'
+    'Infantil',
+    'Eventos em Shoppings',
+    'Ativações de Marcas',
+    'Clube de Tiro',
+    'Clube de Moto',
+    'Ache seu Clube',
+    'Jogos na Cidade'
   ];
 }
