@@ -180,6 +180,22 @@ export default function Index() {
         <p className="font-semibold text-foreground">{user.email}</p>
         <p className="text-sm text-muted-foreground">Membro desde {format(new Date(user.created_at), "MMMM 'de' yyyy", { locale: ptBR })}</p>
       </div>
+
+      <div className="grid grid-cols-2 gap-3">
+        <a href="/sugerir-evento" className="bg-card rounded-xl p-4 text-center hover:bg-accent transition-colors">
+          <span className="text-2xl mb-2 block">💡</span>
+          <span className="text-sm font-medium">Sugerir Evento</span>
+        </a>
+        <a href="/auth/organizador" className="bg-card rounded-xl p-4 text-center hover:bg-accent transition-colors">
+          <span className="text-2xl mb-2 block">🎤</span>
+          <span className="text-sm font-medium">Sou Organizador</span>
+        </a>
+        <a href="/locais" className="bg-card rounded-xl p-4 text-center hover:bg-accent transition-colors">
+          <span className="text-2xl mb-2 block">📍</span>
+          <span className="text-sm font-medium">Locais</span>
+        </a>
+      </div>
+
       <Button variant="outline" onClick={signOut} className="w-full h-12">
         <LogOut className="w-4 h-4 mr-2" />
         Sair da conta
