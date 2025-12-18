@@ -29,11 +29,15 @@ export type Database = {
           estado: string
           id: string
           imagem: string | null
+          link_origem: string | null
           local: string
+          local_id: string | null
           nome: string
+          organizador_id: string | null
           origem: string | null
           preco: number | null
           preco_max: number | null
+          status: string | null
         }
         Insert: {
           categoria: string
@@ -49,11 +53,15 @@ export type Database = {
           estado?: string
           id?: string
           imagem?: string | null
+          link_origem?: string | null
           local: string
+          local_id?: string | null
           nome: string
+          organizador_id?: string | null
           origem?: string | null
           preco?: number | null
           preco_max?: number | null
+          status?: string | null
         }
         Update: {
           categoria?: string
@@ -69,13 +77,25 @@ export type Database = {
           estado?: string
           id?: string
           imagem?: string | null
+          link_origem?: string | null
           local?: string
+          local_id?: string | null
           nome?: string
+          organizador_id?: string | null
           origem?: string | null
           preco?: number | null
           preco_max?: number | null
+          status?: string | null
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "eventos_local_id_fkey"
+            columns: ["local_id"]
+            isOneToOne: false
+            referencedRelation: "locais"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       favoritos: {
         Row: {
@@ -102,6 +122,107 @@ export type Database = {
             columns: ["evento_id"]
             isOneToOne: false
             referencedRelation: "eventos"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      locais: {
+        Row: {
+          categorias: string[] | null
+          cidade: string | null
+          claimed_at: string | null
+          claimed_by: string | null
+          coordenadas_lat: number | null
+          coordenadas_lng: number | null
+          created_at: string | null
+          descricao: string | null
+          endereco: string | null
+          estado: string | null
+          id: string
+          imagem: string | null
+          instagram: string | null
+          nome: string
+          telefone: string | null
+          updated_at: string | null
+          verified: boolean | null
+          website: string | null
+        }
+        Insert: {
+          categorias?: string[] | null
+          cidade?: string | null
+          claimed_at?: string | null
+          claimed_by?: string | null
+          coordenadas_lat?: number | null
+          coordenadas_lng?: number | null
+          created_at?: string | null
+          descricao?: string | null
+          endereco?: string | null
+          estado?: string | null
+          id?: string
+          imagem?: string | null
+          instagram?: string | null
+          nome: string
+          telefone?: string | null
+          updated_at?: string | null
+          verified?: boolean | null
+          website?: string | null
+        }
+        Update: {
+          categorias?: string[] | null
+          cidade?: string | null
+          claimed_at?: string | null
+          claimed_by?: string | null
+          coordenadas_lat?: number | null
+          coordenadas_lng?: number | null
+          created_at?: string | null
+          descricao?: string | null
+          endereco?: string | null
+          estado?: string | null
+          id?: string
+          imagem?: string | null
+          instagram?: string | null
+          nome?: string
+          telefone?: string | null
+          updated_at?: string | null
+          verified?: boolean | null
+          website?: string | null
+        }
+        Relationships: []
+      }
+      local_claims: {
+        Row: {
+          created_at: string | null
+          documento_comprovante: string | null
+          id: string
+          local_id: string | null
+          mensagem: string | null
+          status: string | null
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          documento_comprovante?: string | null
+          id?: string
+          local_id?: string | null
+          mensagem?: string | null
+          status?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          documento_comprovante?: string | null
+          id?: string
+          local_id?: string | null
+          mensagem?: string | null
+          status?: string | null
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "local_claims_local_id_fkey"
+            columns: ["local_id"]
+            isOneToOne: false
+            referencedRelation: "locais"
             referencedColumns: ["id"]
           },
         ]
@@ -136,15 +257,98 @@ export type Database = {
         }
         Relationships: []
       }
+      sugestoes_eventos: {
+        Row: {
+          created_at: string | null
+          dados_raw: Json | null
+          data: string | null
+          descricao: string | null
+          evento_id: string | null
+          id: string
+          imagem: string | null
+          link_origem: string
+          local: string | null
+          nome: string | null
+          status: string | null
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          dados_raw?: Json | null
+          data?: string | null
+          descricao?: string | null
+          evento_id?: string | null
+          id?: string
+          imagem?: string | null
+          link_origem: string
+          local?: string | null
+          nome?: string | null
+          status?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          dados_raw?: Json | null
+          data?: string | null
+          descricao?: string | null
+          evento_id?: string | null
+          id?: string
+          imagem?: string | null
+          link_origem?: string
+          local?: string | null
+          nome?: string | null
+          status?: string | null
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "sugestoes_eventos_evento_id_fkey"
+            columns: ["evento_id"]
+            isOneToOne: false
+            referencedRelation: "eventos"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      user_roles: {
+        Row: {
+          created_at: string | null
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+          verified: boolean | null
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id: string
+          verified?: boolean | null
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+          verified?: boolean | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "user" | "organizador" | "local" | "admin"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -271,6 +475,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["user", "organizador", "local", "admin"],
+    },
   },
 } as const
