@@ -189,9 +189,9 @@ export default function Index() {
 
   return (
     <div className="min-h-screen bg-background pb-20">
-      <header className="sticky top-0 z-40 glass border-b border-border px-4 py-3">
+      <header className="sticky top-0 z-40 glass border-b border-border px-4 py-4">
         <div className="flex items-center justify-center relative">
-          <img src={logoHojeTem} alt="HOJE TEM" className="h-16" />
+          <img src={logoHojeTem} alt="HOJE TEM" className="h-32" />
           <div className="absolute right-0">
             <CitySelector
               cidade={filtros.cidade}
