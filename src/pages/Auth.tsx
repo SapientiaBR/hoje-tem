@@ -59,7 +59,7 @@ export default function Auth() {
       <div className="flex-1 flex flex-col justify-center px-6 py-12">
         <div className="mx-auto w-full max-w-sm">
           <div className="text-center mb-8">
-            <img src={logoHojeTem} alt="HOJE TEM" className="h-24 mx-auto mb-4" />
+            <img src={logoHojeTem} alt="HOJE TEM" className="h-48 mx-auto mb-6" />
             <p className="text-muted-foreground mt-2">
               Seu rolê começa aqui.
             </p>
