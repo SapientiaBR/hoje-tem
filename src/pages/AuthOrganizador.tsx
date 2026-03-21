@@ -58,7 +58,7 @@ export default function AuthOrganizador() {
       <div className="min-h-screen bg-background flex flex-col">
         <div className="flex-1 flex flex-col justify-center px-6 py-12">
           <div className="mx-auto w-full max-w-sm text-center">
-            <img src={logoHojeTem} alt="HOJE TEM" className="h-24 object-contain filter drop-shadow-[0_0_8px_rgba(157,78,221,0.5)] mx-auto mb-6" />
+            <img src={logoHojeTem} alt="HOJE TEM" className="h-32 mx-auto mb-6" />
             <Building2 className="w-16 h-16 mx-auto mb-4 text-primary" />
             <h1 className="text-2xl font-bold text-foreground mb-2">Seja um Organizador</h1>
             <p className="text-muted-foreground mb-6">
@@ -66,7 +66,7 @@ export default function AuthOrganizador() {
             </p>
             <Button 
               onClick={handleBecomeOrganizador} 
-              className="w-full h-12 gradient-primary text-white border-0 shadow-[0_0_15px_rgba(157,78,221,0.3)] hover:opacity-90 rounded-xl font-medium"
+              className="w-full h-12"
               disabled={submitting}
             >
               {submitting ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : null}
@@ -119,7 +119,7 @@ export default function AuthOrganizador() {
       <div className="flex-1 flex flex-col justify-center px-6 py-12">
         <div className="mx-auto w-full max-w-sm">
           <div className="text-center mb-8">
-            <img src={logoHojeTem} alt="HOJE TEM" className="h-24 object-contain filter drop-shadow-[0_0_8px_rgba(157,78,221,0.5)] mx-auto mb-4" />
+            <img src={logoHojeTem} alt="HOJE TEM" className="h-32 mx-auto mb-4" />
             <Building2 className="w-12 h-12 mx-auto mb-2 text-primary" />
             <h1 className="text-xl font-bold text-foreground">Área do Organizador</h1>
             <p className="text-muted-foreground text-sm mt-1">
@@ -174,7 +174,7 @@ export default function AuthOrganizador() {
                 minLength={6}
               />
             </div>
-            <Button type="submit" className="w-full h-12 gradient-primary text-white border-0 shadow-[0_0_15px_rgba(157,78,221,0.3)] hover:opacity-90 rounded-xl font-medium" disabled={submitting}>
+            <Button type="submit" className="w-full h-12" disabled={submitting}>
               {submitting ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : null}
               {isLogin ? 'Entrar' : 'Cadastrar'}
             </Button>
