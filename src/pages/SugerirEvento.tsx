@@ -136,7 +136,7 @@ export default function SugerirEvento() {
               <ArrowLeft className="w-5 h-5" />
               <span className="text-sm">Voltar</span>
             </Link>
-            <img src={logoHojeTem} alt="HOJE TEM" className="h-12" />
+            <img src={logoHojeTem} alt="HOJE TEM" className="h-10 object-contain filter drop-shadow-[0_0_8px_rgba(157,78,221,0.5)]" />
             <div className="w-16" />
           </div>
         </header>
@@ -170,7 +170,7 @@ export default function SugerirEvento() {
             <ArrowLeft className="w-5 h-5" />
             <span className="text-sm">Voltar</span>
           </Link>
-          <img src={logoHojeTem} alt="HOJE TEM" className="h-12" />
+          <img src={logoHojeTem} alt="HOJE TEM" className="h-10 object-contain filter drop-shadow-[0_0_8px_rgba(157,78,221,0.5)]" />
           <div className="w-16" />
         </div>
       </header>
@@ -184,7 +184,7 @@ export default function SugerirEvento() {
           </p>
         </div>
 
-        <Card>
+        <Card className="glass border-border/50 backdrop-blur-xl bg-background/40 shadow-[0_8px_32px_rgba(0,0,0,0.3)]">
           <CardHeader>
             <CardTitle className="text-lg flex items-center gap-2">
               <LinkIcon className="w-5 h-5" />
@@ -212,7 +212,7 @@ export default function SugerirEvento() {
         </Card>
 
         {extracting && (
-          <Card>
+          <Card className="glass border-border/50 backdrop-blur-xl bg-background/40 shadow-[0_8px_32px_rgba(0,0,0,0.3)] mt-6">
             <CardContent className="py-8 text-center">
               <Loader2 className="w-8 h-8 animate-spin text-primary mx-auto mb-4" />
               <p className="text-muted-foreground">Analisando a página...</p>
@@ -222,7 +222,7 @@ export default function SugerirEvento() {
         )}
 
         {extracted && (
-          <Card>
+          <Card className="glass border-border/50 backdrop-blur-xl bg-background/40 shadow-[0_8px_32px_rgba(0,0,0,0.3)] mt-6">
             <CardHeader>
               <CardTitle className="text-lg">Informações extraídas</CardTitle>
               <CardDescription>Revise os dados antes de enviar</CardDescription>
@@ -281,7 +281,7 @@ export default function SugerirEvento() {
                 </div>
               )}
 
-              <Button onClick={handleSubmit} className="w-full" disabled={submitting}>
+              <Button onClick={handleSubmit} className="w-full gradient-primary text-white border-0 shadow-[0_0_15px_rgba(157,78,221,0.3)] hover:opacity-90 rounded-xl font-medium" disabled={submitting}>
                 {submitting ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : <Check className="w-4 h-4 mr-2" />}
                 Enviar Sugestão
               </Button>

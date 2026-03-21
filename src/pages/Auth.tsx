@@ -55,52 +55,56 @@ export default function Auth() {
   };
 
   return (
-    <div className="min-h-screen bg-background flex flex-col">
-      <div className="flex-1 flex flex-col justify-center px-6 py-12">
-        <div className="mx-auto w-full max-w-sm">
-          <div className="text-center mb-8">
-            <img src={logoHojeTem} alt="HOJE TEM" className="h-48 mx-auto mb-6" />
-            <p className="text-muted-foreground mt-2">
-              Seu rolê começa aqui.
-            </p>
-          </div>
+    <div className="min-h-screen bg-[#0A0118] relative overflow-hidden flex flex-col justify-center px-6 py-12">
+      {/* Background decorations */}
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-purple-600/20 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-blue-600/20 rounded-full blur-[120px] pointer-events-none" />
+      
+      <div className="mx-auto w-full max-w-md relative z-10">
+        <div className="text-center mb-10">
+          <img src={logoHojeTem} alt="HOJE TEM" className="h-28 mx-auto mb-6 object-contain filter drop-shadow-[0_0_15px_rgba(157,78,221,0.5)]" />
+          <p className="text-muted-foreground mt-2 font-medium tracking-wide">
+            Seu rolê começa aqui.
+          </p>
+        </div>
 
-          <form onSubmit={handleSubmit} className="space-y-4">
+        <div className="glass border border-white/10 rounded-3xl p-8 shadow-[0_8px_32px_rgba(0,0,0,0.5)] backdrop-blur-xl">
+          <form onSubmit={handleSubmit} className="space-y-5">
             {!isLogin && (
-              <div>
-                <Label htmlFor="nome">Nome</Label>
+              <div className="space-y-1">
+                <Label htmlFor="nome" className="text-white/80 pl-1">Nome</Label>
                 <Input
                   id="nome"
                   type="text"
                   value={nome}
                   onChange={(e) => setNome(e.target.value)}
-                  placeholder="Seu nome"
-                  className="h-12 mt-1"
+                  placeholder="Seu nome completo"
+                  className="h-12 bg-black/40 border-white/10 focus:border-primary/50 focus:ring-primary/50 text-white rounded-xl placeholder:text-white/30"
                   required={!isLogin}
                 />
               </div>
             )}
-            <div>
-              <Label htmlFor="email">Email</Label>
+            <div className="space-y-1">
+              <Label htmlFor="email" className="text-white/80 pl-1">Email</Label>
               <Input
                 id="email"
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="seu@email.com"
-                className="h-12 mt-1"
+                className="h-12 bg-black/40 border-white/10 focus:border-primary/50 focus:ring-primary/50 text-white rounded-xl placeholder:text-white/30"
                 required
               />
             </div>
-            <div>
-              <Label htmlFor="password">Senha</Label>
+            <div className="space-y-1">
+              <Label htmlFor="password" className="text-white/80 pl-1">Senha</Label>
               <Input
                 id="password"
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••"
-                className="h-12 mt-1"
+                className="h-12 bg-black/40 border-white/10 focus:border-primary/50 focus:ring-primary/50 text-white rounded-xl placeholder:text-white/30"
                 minLength={6}
                 required
               />
@@ -108,23 +112,25 @@ export default function Auth() {
             <Button
               type="submit"
               disabled={submitting}
-              className="w-full h-12 gradient-primary text-primary-foreground font-semibold"
+              className="w-full h-12 mt-4 gradient-primary text-white font-bold rounded-xl text-md hover:opacity-90 transition-opacity shadow-[0_0_20px_rgba(157,78,221,0.4)] border-0"
             >
-              {submitting && <Loader2 className="w-4 h-4 mr-2 animate-spin" />}
+              {submitting && <Loader2 className="w-5 h-5 mr-2 animate-spin" />}
               {isLogin ? 'Entrar' : 'Criar conta'}
             </Button>
           </form>
 
-          <p className="mt-6 text-center text-sm text-muted-foreground">
-            {isLogin ? 'Não tem conta?' : 'Já tem conta?'}{' '}
-            <button
-              type="button"
-              onClick={() => setIsLogin(!isLogin)}
-              className="text-primary font-medium hover:underline"
-            >
-              {isLogin ? 'Criar conta' : 'Entrar'}
-            </button>
-          </p>
+          <div className="mt-8 text-center">
+            <p className="text-sm text-white/50">
+              {isLogin ? 'Não tem conta?' : 'Já tem conta?'}{' '}
+              <button
+                type="button"
+                onClick={() => setIsLogin(!isLogin)}
+                className="text-primary font-bold hover:underline transition-all hover:text-primary-foreground focus:outline-none ml-1"
+              >
+                {isLogin ? 'Criar agora' : 'Faça login'}
+              </button>
+            </p>
+          </div>
         </div>
       </div>
     </div>

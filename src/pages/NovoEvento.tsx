@@ -104,13 +104,13 @@ export default function NovoEvento() {
             <ArrowLeft className="w-5 h-5" />
             <span className="text-sm">Voltar</span>
           </Link>
-          <img src={logoHojeTem} alt="HOJE TEM" className="h-12" />
+          <img src={logoHojeTem} alt="HOJE TEM" className="h-10 object-contain filter drop-shadow-[0_0_8px_rgba(157,78,221,0.5)]" />
           <div className="w-16" />
         </div>
       </header>
 
-      <main className="max-w-2xl mx-auto px-4 py-6">
-        <Card>
+      <main className="max-w-2xl mx-auto px-4 py-8">
+        <Card className="glass border-border/50 backdrop-blur-xl bg-background/40 shadow-[0_8px_32px_rgba(0,0,0,0.3)]">
           <CardHeader>
             <CardTitle>Criar Novo Evento</CardTitle>
             <CardDescription>Preencha as informações do seu evento</CardDescription>
@@ -275,8 +275,8 @@ export default function NovoEvento() {
                 />
               </div>
 
-              <Button type="submit" className="w-full h-12" disabled={submitting}>
-                {submitting ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : <Save className="w-4 h-4 mr-2" />}
+              <Button type="submit" className="w-full h-12 mt-6 gradient-primary text-white font-bold rounded-xl hover:opacity-90 transition-opacity shadow-[0_0_15px_rgba(157,78,221,0.3)] border-0" disabled={submitting}>
+                {submitting ? <Loader2 className="w-5 h-5 animate-spin mr-2" /> : <Save className="w-5 h-5 mr-2" />}
                 Publicar Evento
               </Button>
             </form>

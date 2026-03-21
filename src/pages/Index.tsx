@@ -12,6 +12,8 @@ import { CategoryPills } from '@/components/CategoryPills';
 import { EventCard } from '@/components/EventCard';
 import { EventDetail } from '@/components/EventDetail';
 import { FilterSheet } from '@/components/FilterSheet';
+import { MapTab } from '@/components/MapTab';
+import { CalendarTab } from '@/components/CalendarTab';
 import { Loader2, Heart, MapPin, CalendarDays, LogOut } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { format } from 'date-fns';
@@ -155,17 +157,34 @@ export default function Index() {
     </div>
   );
 
-  const renderMapa = () => (
-    <div className="flex flex-col items-center justify-center py-12 text-center">
-      <MapPin className="w-12 h-12 text-muted-foreground/30 mb-4" />
-      <p className="text-muted-foreground">Mapa em breve!</p>
-    </div>
-  );
+  const renderMapa = () => {
+    const eventosFiltrados = filtros.categoria === 'Todos' 
+      ? eventos 
+      : eventos.filter(e => e.categoria === filtros.categoria);
+      
+    return (
+      <div className="pt-0 pb-6 space-y-4">
+        <CategoryPills
+          categorias={categorias}
+          selected={filtros.categoria}
+          onSelect={(categoria) => setFiltros({ ...filtros, categoria })}
+        />
+        <MapTab 
+          eventos={eventosFiltrados} 
+          onEventClick={setSelectedEvento} 
+        />
+      </div>
+    );
+  };
 
   const renderCalendario = () => (
-    <div className="flex flex-col items-center justify-center py-12 text-center">
-      <CalendarDays className="w-12 h-12 text-muted-foreground/30 mb-4" />
-      <p className="text-muted-foreground">Calendário em breve!</p>
+    <div className="pt-2 pb-6">
+      <CalendarTab 
+        eventos={eventos} 
+        isFavorito={isFavorito}
+        onToggleFavorito={toggleFavorito}
+        onEventClick={setSelectedEvento} 
+      />
     </div>
   );
 
@@ -205,9 +224,9 @@ export default function Index() {
 
   return (
     <div className="min-h-screen bg-background pb-20">
-      <header className="sticky top-0 z-40 glass border-b border-border px-4 py-4">
+      <header className="sticky top-0 z-40 glass border-b border-white/10 px-4 py-3 shadow-[0_4px_30px_rgba(0,0,0,0.1)]">
         <div className="flex items-center justify-center relative">
-          <img src={logoHojeTem} alt="HOJE TEM" className="h-32" />
+          <img src={logoHojeTem} alt="HOJE TEM" className="h-10 object-contain filter drop-shadow-[0_0_8px_rgba(157,78,221,0.5)]" />
           <div className="absolute right-0">
             <CitySelector
               cidade={filtros.cidade}

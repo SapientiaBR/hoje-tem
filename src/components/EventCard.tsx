@@ -55,7 +55,7 @@ export function EventCard({ evento, isFavorito, onToggleFavorito, onClick, varia
   if (variant === 'featured') {
     return (
       <article
-        className="group relative flex-shrink-0 w-64 rounded-2xl overflow-hidden cursor-pointer hover-lift"
+        className="group relative flex-shrink-0 w-52 rounded-2xl overflow-hidden cursor-pointer hover-lift"
         onClick={onClick}
         style={{ aspectRatio: '4/5' }}
       >
