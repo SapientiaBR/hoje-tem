@@ -158,17 +158,16 @@ export default function Index() {
   );
 
   const renderMapa = () => (
-    <div className="flex flex-col items-center justify-center py-12 text-center">
-      <MapPin className="w-12 h-12 text-muted-foreground/30 mb-4" />
-      <p className="text-muted-foreground">Mapa em breve!</p>
-    </div>
+    <MapTab eventos={eventos} onEventClick={setSelectedEvento} />
   );
 
   const renderCalendario = () => (
-    <div className="flex flex-col items-center justify-center py-12 text-center">
-      <CalendarDays className="w-12 h-12 text-muted-foreground/30 mb-4" />
-      <p className="text-muted-foreground">Calendário em breve!</p>
-    </div>
+    <CalendarTab
+      eventos={eventos}
+      isFavorito={isFavorito}
+      onToggleFavorito={toggleFavorito}
+      onEventClick={setSelectedEvento}
+    />
   );
 
   const renderPerfil = () => (
