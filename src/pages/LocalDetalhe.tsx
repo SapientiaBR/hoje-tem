@@ -88,7 +88,7 @@ export default function LocalDetalhe() {
       <div className="min-h-screen bg-background">
         <header className="sticky top-0 z-40 glass border-b border-border px-4 py-4">
           <div className="flex items-center justify-center">
-            <img src={logoHojeTem} alt="HOJE TEM" className="h-10 object-contain filter drop-shadow-[0_0_8px_rgba(157,78,221,0.5)]" />
+            <img src={logoHojeTem} alt="HOJE TEM" className="h-12" />
           </div>
         </header>
         <main className="max-w-2xl mx-auto px-4 py-12 text-center">
@@ -114,7 +114,7 @@ export default function LocalDetalhe() {
             <ArrowLeft className="w-5 h-5" />
             <span className="text-sm">Voltar</span>
           </Link>
-          <img src={logoHojeTem} alt="HOJE TEM" className="h-10 object-contain filter drop-shadow-[0_0_8px_rgba(157,78,221,0.5)]" />
+          <img src={logoHojeTem} alt="HOJE TEM" className="h-12" />
           <div className="w-16" />
         </div>
       </header>
@@ -138,7 +138,7 @@ export default function LocalDetalhe() {
         </div>
 
         {/* Info */}
-        <Card className="glass border-border/50 backdrop-blur-xl bg-background/40 shadow-[0_8px_32px_rgba(0,0,0,0.3)]">
+        <Card>
           <CardHeader>
             <CardTitle className="text-2xl">{local.nome}</CardTitle>
             {local.endereco && (
@@ -184,7 +184,7 @@ export default function LocalDetalhe() {
 
             {canClaim && (
               <Link to={`/local/${local.id}/claim`}>
-                <Button variant="outline" className="w-full bg-black/40 border-white/10 hover:bg-white/10 hover:text-primary transition-colors">
+                <Button variant="outline" className="w-full">
                   <Building2 className="w-4 h-4 mr-2" />
                   Este é meu estabelecimento
                 </Button>
@@ -195,7 +195,7 @@ export default function LocalDetalhe() {
 
         {/* Próximos eventos */}
         {eventos.length > 0 && (
-          <Card className="glass border-border/50 backdrop-blur-xl bg-background/40 shadow-[0_8px_32px_rgba(0,0,0,0.3)]">
+          <Card>
             <CardHeader>
               <CardTitle className="text-lg flex items-center gap-2">
                 <Calendar className="w-5 h-5" />
@@ -205,8 +205,8 @@ export default function LocalDetalhe() {
             <CardContent>
               <div className="space-y-3">
                 {eventos.map(evento => (
-                  <Link to={`/evento/${evento.id}`} key={evento.id} className="flex items-center gap-3 p-3 rounded-xl hover:bg-white/5 border border-transparent hover:border-white/10 transition-all">
-                    <div className="w-16 h-16 rounded-xl bg-black/40 overflow-hidden flex-shrink-0">
+                  <Link to={`/evento/${evento.id}`} key={evento.id} className="flex items-center gap-3 p-2 rounded-lg hover:bg-muted transition-colors">
+                    <div className="w-16 h-16 rounded-lg bg-muted overflow-hidden flex-shrink-0">
                       {evento.imagem ? (
                         <img src={evento.imagem} alt={evento.nome} className="w-full h-full object-cover" />
                       ) : (
