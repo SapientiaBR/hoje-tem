@@ -1,0 +1,225 @@
+{
+  "name": "Hoje Tem - Scraper de Eventos",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours",
+              "hoursInterval": 1
+            }
+          ]
+        }
+      },
+      "id": "schedule",
+      "name": "Schedule",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1,
+      "position": [250, 300],
+      "webhookId": "hoje-tem-scraper"
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT nome, url_base, tipo, config FROM fontes_scraper WHERE ativo = true ORDER BY intervalo_minutos ASC",
+        "options": {}
+      },
+      "id": "get-fontes",
+      "name": "Buscar Fontes Ativas",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 3,
+      "position": [450, 300],
+      "credentials": {
+        "postgresql": "hoje-tem-db"
+      }
+    },
+    {
+      "parameters": {
+        "batchSize": 1
+      },
+      "id": "loop-fontes",
+      "name": "Loop sobre Fontes",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [650, 300]
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.url_base }}",
+        "options": {
+          "timeout": 30000
+        }
+      },
+      "id": "scrape-homepage",
+      "name": "Scrapar Página Inicial",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [850, 300],
+      "notesInApp": "Faz scraping da página inicial para descobrir links de eventos"
+    },
+    {
+      "parameters": {
+        "jsCode": "const html = $input.first().json.body;\nconst urlBase = $json.url_base;\n\n// Regex para encontrar links de eventos (ajustar por fonte)\nconst patterns = [\n  /href=\"([^\"]+evento[^\"]+)\"/gi,\n  /href=\"([^\"]+\\/eventos[^\"]+)\"/gi,\n  /href=\"([^\"]+\\.html)\"/gi,\n  /href=\"([^\"]+\\/event\\/[^\"]+)\"/gi\n];\n\nconst urls = [];\nconst seen = new Set();\n\nfor (const pattern of patterns) {\n  let match;\n  while ((match = pattern.exec(html)) !== null) {\n    let url = match[1];\n    if (!url.startsWith('http')) {\n      try {\n        const base = new URL(urlBase);\n        url = base.origin + url;\n      } catch (e) {\n        continue;\n      }\n    }\n    if (!seen.has(url) && url.includes('evento') || url.includes('event') || url.includes('.com.br/')) {\n      seen.add(url);\n      urls.push(url);\n    }\n  }\n}\n\n// Limitar a 20 URLs por fonte\nreturn { urls: urls.slice(0, 20), fonte_nome: $json.nome };"
+      },
+      "id": "extract-urls",
+      "name": "Extrair URLs de Eventos",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1050, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://[SUA-PROJECT-REF].supabase.co/functions/v1/batch-scraper",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "urls",
+              "value": "={{ $json.urls }}"
+            },
+            {
+              "name": "fonte_nome",
+              "value": "={{ $json.fonte_nome }}"
+            },
+            {
+              "name": "max_eventos",
+              "value": "10"
+            }
+          ]
+        },
+        "options": {
+          "timeout": 120000
+        }
+      },
+      "id": "call-batch-scraper",
+      "name": "Chamar Edge Function",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [1250, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "const result = $input.first().json;\n\nreturn {\n  fonte: result.fonte_nome,\n  sucesso: result.success,\n  eventos_encontrados: result.summary?.eventos_encontrados || 0,\n  eventos_inseridos: result.summary?.eventos_inseridos || 0,\n  erros: result.erros?.length || 0,\n  timestamp: new Date().toISOString()\n};"
+      },
+      "id": "format-result",
+      "name": "Formatar Resultado",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1450, 300]
+    },
+    {
+      "parameters": {
+        "operation": "insert",
+        "table": "scraper_jobs",
+        "columns": {
+          "status": "={{ $json.sucesso ? 'concluido' : 'erro' }}",
+          "urls": "={{ JSON.stringify($json.urls) }}",
+          "eventos_encontrados": "={{ $json.eventos_encontrados }}",
+          "eventos_inseridos": "={{ $json.eventos_inseridos }}",
+          "erros": "={{ JSON.stringify([$json.erros]) }}",
+          "started_at": "={{ $json.timestamp }}",
+          "completed_at": "={{ $json.timestamp }}"
+        }
+      },
+      "id": "log-job",
+      "name": "Registrar Job",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 3,
+      "position": [1650, 300],
+      "credentials": {
+        "postgresql": "hoje-tem-db"
+      }
+    }
+  ],
+  "connections": {
+    "Schedule": {
+      "main": [
+        [
+          {
+            "node": "Buscar Fontes Ativas",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Buscar Fontes Ativas": {
+      "main": [
+        [
+          {
+            "node": "Loop sobre Fontes",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Fontes": {
+      "main": [
+        [
+          {
+            "node": "Scrapar Página Inicial",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Scrapar Página Inicial": {
+      "main": [
+        [
+          {
+            "node": "Extrair URLs de Eventos",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extrair URLs de Eventos": {
+      "main": [
+        [
+          {
+            "node": "Chamar Edge Function",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Chamar Edge Function": {
+      "main": [
+        [
+          {
+            "node": "Formatar Resultado",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Formatar Resultado": {
+      "main": [
+        [
+          {
+            "node": "Registrar Job",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": ["hoje-tem", "scraper", "eventos"],
+  "triggerCount": 1,
+  "updatedAt": "2025-03-21T00:00:00.000Z",
+  "versionId": "1"
+}
