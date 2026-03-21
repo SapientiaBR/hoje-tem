@@ -12,6 +12,8 @@ import { CategoryPills } from '@/components/CategoryPills';
 import { EventCard } from '@/components/EventCard';
 import { EventDetail } from '@/components/EventDetail';
 import { FilterSheet } from '@/components/FilterSheet';
+import { MapTab } from '@/components/MapTab';
+import { CalendarTab } from '@/components/CalendarTab';
 import { Loader2, Heart, MapPin, CalendarDays, LogOut } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { format } from 'date-fns';
