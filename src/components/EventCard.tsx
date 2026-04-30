@@ -57,7 +57,7 @@ export function EventCard({ evento, isFavorito, onToggleFavorito, onClick, varia
       <article
         className="group relative flex-shrink-0 w-64 rounded-2xl overflow-hidden cursor-pointer hover-lift"
         onClick={onClick}
-        style={{ aspectRatio: '4/5' }}
+        style={{ aspectRatio: '8/5' }}
       >
         {/* Image */}
         <img
@@ -135,7 +135,7 @@ export function EventCard({ evento, isFavorito, onToggleFavorito, onClick, varia
       onClick={onClick}
     >
       {/* Image */}
-      <div className="relative aspect-[4/3] overflow-hidden">
+      <div className="relative aspect-[8/3] overflow-hidden">
         <img
           src={evento.imagem || 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=600&q=80'}
           alt={evento.nome}
