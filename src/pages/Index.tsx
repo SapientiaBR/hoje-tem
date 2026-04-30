@@ -114,7 +114,7 @@ export default function Index() {
             <p className="text-muted-foreground">Nenhum evento encontrado</p>
           </div>
         ) : (
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
             {eventos.map(evento => (
               <EventCard
                 key={evento.id}
@@ -142,7 +142,7 @@ export default function Index() {
           <p className="text-muted-foreground">Você ainda não salvou nenhum evento</p>
         </div>
       ) : (
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
           {eventosFavoritos.map(evento => (
             <EventCard
               key={evento.id}
@@ -182,7 +182,7 @@ export default function Index() {
         <p className="text-sm text-muted-foreground">Membro desde {format(new Date(user.created_at), "MMMM 'de' yyyy", { locale: ptBR })}</p>
       </div>
 
-      <div className="grid grid-cols-2 gap-3">
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
         <a href="/sugerir-evento" className="bg-card rounded-xl p-4 text-center hover:bg-accent transition-colors">
           <span className="text-2xl mb-2 block">💡</span>
           <span className="text-sm font-medium">Sugerir Evento</span>
