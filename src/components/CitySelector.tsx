@@ -12,33 +12,26 @@ interface CitySelectorProps {
 }
 
 const cidades = [
-  'São Paulo',
-  'Rio de Janeiro',
-  'Belo Horizonte',
-  'Curitiba',
-  'Porto Alegre',
-  'Salvador',
-  'Brasília',
-  'Recife',
-  'Fortaleza',
+  'São Paulo', 'Rio de Janeiro', 'Belo Horizonte', 'Curitiba',
+  'Porto Alegre', 'Salvador', 'Brasília', 'Recife', 'Fortaleza',
 ];
 
 export function CitySelector({ cidade, onCidadeChange }: CitySelectorProps) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <button className="flex items-center gap-2 px-3 py-2 rounded-full bg-secondary hover:bg-secondary/80 transition-colors">
-          <MapPin className="w-4 h-4 text-primary" />
-          <span className="font-medium text-sm">{cidade}</span>
-          <ChevronDown className="w-4 h-4 text-muted-foreground" />
+        <button className="flex items-center gap-1.5 label-mono text-[10px] text-foreground hover:text-neon transition-colors">
+          <MapPin className="w-3 h-3" />
+          <span>{cidade}</span>
+          <ChevronDown className="w-3 h-3" />
         </button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="start" className="w-48">
+      <DropdownMenuContent align="end" className="w-48 bg-card border-border">
         {cidades.map((c) => (
           <DropdownMenuItem
             key={c}
             onClick={() => onCidadeChange(c)}
-            className={cidade === c ? 'bg-primary/10 text-primary' : ''}
+            className={`label-mono text-[11px] cursor-pointer ${cidade === c ? 'text-neon' : ''}`}
           >
             {c}
           </DropdownMenuItem>

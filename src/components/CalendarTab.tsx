@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Calendar } from '@/components/ui/calendar';
 import { Evento } from '@/hooks/useEventos';
 import { EventCard } from './EventCard';
-import { isSameDay } from 'date-fns';
+import { isSameDay, format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 
 interface CalendarTabProps {
@@ -21,8 +21,13 @@ export function CalendarTab({ eventos, isFavorito, onToggleFavorito, onEventClic
   });
 
   return (
-    <div className="space-y-4">
-      <div className="bg-card rounded-2xl p-4 flex justify-center">
+    <div className="space-y-5">
+      <div>
+        <h1 className="headline text-foreground text-3xl mb-1">SUA AGENDA</h1>
+        <p className="label-mono text-[10px] text-muted-foreground">o que você não pode perder</p>
+      </div>
+
+      <div className="bg-card p-3 flex justify-center">
         <Calendar
           mode="single"
           selected={date}
@@ -33,18 +38,16 @@ export function CalendarTab({ eventos, isFavorito, onToggleFavorito, onEventClic
       </div>
 
       <div className="space-y-3">
-        <h3 className="text-base font-bold text-foreground">
-          {date
-            ? `Eventos em ${date.toLocaleDateString('pt-BR', { day: '2-digit', month: 'long' })}`
-            : 'Selecione uma data'}
-        </h3>
+        <h2 className="headline text-foreground text-xl">
+          {date ? format(date, "d 'DE' MMMM", { locale: ptBR }).toUpperCase() : 'ESCOLHA UM DIA'}
+        </h2>
 
         {eventosDoDia.length === 0 ? (
-          <div className="text-center py-8">
-            <p className="text-muted-foreground">Nenhum evento programado.</p>
+          <div className="text-center py-12 border border-border">
+            <p className="label-mono text-[11px] text-muted-foreground">NADA ROLANDO POR AQUI</p>
           </div>
         ) : (
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
             {eventosDoDia.map((evento) => (
               <EventCard
                 key={evento.id}
