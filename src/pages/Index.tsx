@@ -17,6 +17,7 @@ import { Loader2, ArrowRight, LogOut, Bookmark } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { format, differenceInHours } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
+import logoHojeTem from '@/assets/logo-hoje-tem.png';
 
 const HERO_FALLBACK = 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=1200&q=80';
 
@@ -310,10 +311,8 @@ export default function Index() {
     <div className="min-h-screen bg-background pb-20">
       <header className="sticky top-0 z-40 bg-background/95 backdrop-blur-md border-b border-border px-4 py-3">
         <div className="flex items-center justify-between">
-          <div className="flex items-baseline gap-1.5">
-            <span className="headline text-foreground text-xl">HOJE</span>
-            <span className="headline text-neon text-xl">TEM</span>
-          </div>
+          <img src={logoHojeTem} alt="HOJE TEM" className="h-10 w-auto object-contain" />
+
           <CitySelector
             cidade={filtros.cidade}
             onCidadeChange={(cidade) => setFiltros({ ...filtros, cidade })}
