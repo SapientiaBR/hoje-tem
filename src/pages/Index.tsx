@@ -64,8 +64,10 @@ export default function Index() {
   }
 
   const eventosFavoritos = eventos.filter(e => isFavorito(e.id));
-  const eventosDestaque = eventos.filter(e => e.destaque);
-  const heroEvento = eventosDestaque[0] || eventos[0];
+  const now = new Date();
+  const eventosFuturos = eventos.filter(e => new Date(e.data) >= now);
+  const eventosDestaque = eventosFuturos.filter(e => e.destaque);
+  const heroEvento = eventosDestaque[0] || eventosFuturos[0] || eventos[0];
   const trending = eventosDestaque.slice(0, 3);
 
   // hype counter "fake" determinístico (já que não temos métrica real)
