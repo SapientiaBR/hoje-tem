@@ -100,7 +100,7 @@ export default function Organizador() {
             <ArrowLeft className="w-5 h-5" />
             <span className="text-sm">Voltar</span>
           </Link>
-          <img src={logoHojeTem} alt="HOJE TEM" className="h-10 object-contain filter drop-shadow-[0_0_8px_rgba(157,78,221,0.5)]" />
+          <img src={logoHojeTem} alt="HOJE TEM" className="h-12" />
           <Button variant="ghost" size="sm" onClick={signOut}>
             Sair
           </Button>
@@ -114,7 +114,7 @@ export default function Organizador() {
             <p className="text-muted-foreground text-sm">Gerencie seus eventos</p>
           </div>
           <Link to="/organizador/novo-evento">
-            <Button className="gradient-primary text-white border-0 shadow-[0_0_15px_rgba(157,78,221,0.3)] hover:opacity-90 rounded-xl">
+            <Button>
               <Plus className="w-4 h-4 mr-2" />
               Criar Evento
             </Button>
@@ -126,12 +126,12 @@ export default function Organizador() {
             <Loader2 className="w-8 h-8 animate-spin text-primary" />
           </div>
         ) : eventos.length === 0 ? (
-          <Card className="glass border-border/50 backdrop-blur-md bg-background/40 shadow-lg">
+          <Card>
             <CardContent className="py-12 text-center">
               <Calendar className="w-12 h-12 mx-auto text-muted-foreground/30 mb-4" />
               <p className="text-muted-foreground mb-4">Você ainda não criou nenhum evento</p>
               <Link to="/organizador/novo-evento">
-                <Button className="gradient-primary text-white border-0 shadow-[0_0_15px_rgba(157,78,221,0.3)] hover:opacity-90 rounded-xl">
+                <Button>
                   <Plus className="w-4 h-4 mr-2" />
                   Criar primeiro evento
                 </Button>
@@ -141,7 +141,7 @@ export default function Organizador() {
         ) : (
           <div className="space-y-4">
             {eventos.map(evento => (
-              <Card key={evento.id} className="glass border-border/50 backdrop-blur-md bg-background/40 shadow-md">
+              <Card key={evento.id}>
                 <CardHeader className="pb-2">
                   <div className="flex items-start justify-between gap-4">
                     <div className="flex-1">

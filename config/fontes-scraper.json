@@ -1,0 +1,80 @@
+{
+  "fontes": [
+    {
+      "nome": "Guia da Semana",
+      "url_base": "https://www.guiadasemana.com.br/",
+      "tipo": "site",
+      "selectores_urls": [".evento-card a", ".agenda-item a", "a[href*='/evento/']"],
+      "intervalo_minutos": 60
+    },
+    {
+      "nome": "Folha Guia",
+      "url_base": "https://guia.folha.uol.com.br/",
+      "tipo": "site",
+      "selectores_urls": [".agenda-item", ".item-evento a"],
+      "intervalo_minutos": 60
+    },
+    {
+      "nome": "G1 São Paulo",
+      "url_base": "https://g1.globo.com/guia/guia-sp/",
+      "tipo": "site",
+      "selectores_urls": [".feed-post-link", ".g1-carrossel__item a"],
+      "intervalo_minutos": 60
+    },
+    {
+      "nome": "Agenda Viva SP",
+      "url_base": "https://agendavivasp.com.br/",
+      "tipo": "site",
+      "selectores_urls": [".evento-item a", ".agenda-card a"],
+      "intervalo_minutos": 60
+    },
+    {
+      "nome": "Guias SP 24h",
+      "url_base": "https://www.guiasp24h.com.br/",
+      "tipo": "site",
+      "selectores_urls": [".evento a", ".card-evento a"],
+      "intervalo_minutos": 60
+    },
+    {
+      "nome": "Catraca Livre",
+      "url_base": "https://catracalivre.com.br/gira/",
+      "tipo": "site",
+      "selectores_urls": [".card-evento a", ".post-item a"],
+      "intervalo_minutos": 60
+    },
+    {
+      "nome": "Sympla",
+      "url_base": "https://www.sympla.com.br/eventos",
+      "tipo": "api",
+      "api_url": "https://api.sympla.com.br/v4/events",
+      "intervalo_minutos": 30
+    },
+    {
+      "nome": "Eventbrite",
+      "url_base": "https://www.eventbrite.com/d/brazil--sao-paulo/events/",
+      "tipo": "site",
+      "selectores_urls": [".event-card", ".event-item a"],
+      "intervalo_minutos": 30
+    },
+    {
+      "nome": "Ingresso Rápido",
+      "url_base": "https://www.ingressorapido.com.br/",
+      "tipo": "api",
+      "api_url": "https://api.ingressorapido.com.br/v1/events",
+      "intervalo_minutos": 30
+    },
+    {
+      "nome": "Fever",
+      "url_base": "https://www.fever.com.br/",
+      "tipo": "site",
+      "selectores_urls": [".event-item", ".experience-card a"],
+      "intervalo_minutos": 30
+    }
+  ],
+  "configuracao_global": {
+    "max_urls_por_fonte": 20,
+    "max_eventos_por_execucao": 50,
+    "timeout_scraping_segundos": 30,
+    "delay_entre_requisicoes_ms": 1000
+  }
+}

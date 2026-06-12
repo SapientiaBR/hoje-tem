@@ -55,7 +55,7 @@ export default function Locais() {
             <ArrowLeft className="w-5 h-5" />
             <span className="text-sm">Voltar</span>
           </Link>
-          <img src={logoHojeTem} alt="HOJE TEM" className="h-10 object-contain filter drop-shadow-[0_0_8px_rgba(157,78,221,0.5)]" />
+          <img src={logoHojeTem} alt="HOJE TEM" className="h-12" />
           <div className="w-16" />
         </div>
       </header>
@@ -69,13 +69,13 @@ export default function Locais() {
           </p>
         </div>
 
-        <div className="relative mb-8 max-w-xl mx-auto">
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+        <div className="relative mb-6">
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
           <Input
             value={busca}
             onChange={(e) => setBusca(e.target.value)}
             placeholder="Buscar local..."
-            className="pl-12 h-14 bg-black/40 border-white/10 focus:border-primary/50 focus:ring-primary/50 text-white rounded-2xl placeholder:text-white/30 text-lg shadow-[0_8px_32px_rgba(0,0,0,0.3)] backdrop-blur-xl"
+            className="pl-10"
           />
         </div>
 
@@ -93,11 +93,11 @@ export default function Locais() {
             </CardContent>
           </Card>
         ) : (
-          <div className="grid gap-6 sm:grid-cols-2">
+          <div className="grid gap-4 sm:grid-cols-2">
             {filteredLocais.map(local => (
               <Link to={`/local/${local.id}`} key={local.id}>
-                <Card className="glass border-border/50 backdrop-blur-lg bg-background/40 shadow-lg overflow-hidden hover:border-primary/50 hover:shadow-[0_8px_32px_rgba(157,78,221,0.2)] transition-all hover:-translate-y-1">
-                  <div className="aspect-video bg-black/40 relative">
+                <Card className="overflow-hidden hover:border-primary/50 transition-colors">
+                  <div className="aspect-video bg-muted relative">
                     {local.imagem ? (
                       <img src={local.imagem} alt={local.nome} className="w-full h-full object-cover" />
                     ) : (

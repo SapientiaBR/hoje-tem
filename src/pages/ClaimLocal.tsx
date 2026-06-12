@@ -117,7 +117,7 @@ export default function ClaimLocal() {
       <div className="min-h-screen bg-background">
         <header className="sticky top-0 z-40 glass border-b border-border px-4 py-4">
           <div className="flex items-center justify-center">
-            <img src={logoHojeTem} alt="HOJE TEM" className="h-10 object-contain filter drop-shadow-[0_0_8px_rgba(157,78,221,0.5)]" />
+            <img src={logoHojeTem} alt="HOJE TEM" className="h-12" />
           </div>
         </header>
         <main className="max-w-2xl mx-auto px-4 py-12 text-center">
@@ -144,7 +144,7 @@ export default function ClaimLocal() {
             <ArrowLeft className="w-5 h-5" />
             <span className="text-sm">Voltar</span>
           </Link>
-          <img src={logoHojeTem} alt="HOJE TEM" className="h-10 object-contain filter drop-shadow-[0_0_8px_rgba(157,78,221,0.5)]" />
+          <img src={logoHojeTem} alt="HOJE TEM" className="h-12" />
           <div className="w-16" />
         </div>
       </header>
@@ -158,7 +158,7 @@ export default function ClaimLocal() {
           </p>
         </div>
 
-        <Card className="glass border-border/50 backdrop-blur-xl bg-background/40 shadow-[0_8px_32px_rgba(0,0,0,0.3)]">
+        <Card>
           <CardHeader>
             <CardTitle className="text-lg">Informações para verificação</CardTitle>
             <CardDescription>
@@ -192,7 +192,7 @@ export default function ClaimLocal() {
                 </p>
               </div>
 
-              <Button type="submit" className="w-full gradient-primary text-white border-0 shadow-[0_0_15px_rgba(157,78,221,0.3)] hover:opacity-90 rounded-xl" disabled={submitting}>
+              <Button type="submit" className="w-full" disabled={submitting}>
                 {submitting ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : null}
                 Enviar Solicitação
               </Button>

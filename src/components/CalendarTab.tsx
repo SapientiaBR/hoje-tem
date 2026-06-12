@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Calendar } from '@/components/ui/calendar';
 import { Evento } from '@/hooks/useEventos';
 import { EventCard } from './EventCard';
-import { isSameDay } from 'date-fns';
+import { isSameDay, format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 
 interface CalendarTabProps {
@@ -21,34 +21,33 @@ export function CalendarTab({ eventos, isFavorito, onToggleFavorito, onEventClic
   });
 
   return (
-    <div className="flex flex-col gap-6 pb-6">
-      <div className="flex justify-center">
-        <div className="glass rounded-2xl p-2 inline-block shadow-lg border border-border">
-          <Calendar
-            mode="single"
-            selected={date}
-            onSelect={setDate}
-            locale={ptBR}
-            className="rounded-xl w-full"
-            classNames={{
-              day_today: "bg-accent/50 text-accent-foreground font-bold",
-              day_selected: "bg-primary text-primary-foreground hover:bg-primary hover:text-primary-foreground focus:bg-primary focus:text-primary-foreground font-bold shadow-[0_0_12px_hsl(267_90%_65%/0.5)]",
-            }}
-          />
-        </div>
+    <div className="space-y-5">
+      <div>
+        <h1 className="headline text-foreground text-3xl mb-1">SUA AGENDA</h1>
+        <p className="label-mono text-[10px] text-muted-foreground">o que você não pode perder</p>
       </div>
 
-      <div>
-        <h2 className="text-lg font-bold text-foreground mb-4">
-          {date ? `Eventos em ${date.toLocaleDateString('pt-BR', { day: '2-digit', month: 'long' })}` : 'Selecione uma data'}
+      <div className="bg-card p-3 flex justify-center">
+        <Calendar
+          mode="single"
+          selected={date}
+          onSelect={setDate}
+          locale={ptBR}
+          className="pointer-events-auto"
+        />
+      </div>
+
+      <div className="space-y-3">
+        <h2 className="headline text-foreground text-xl">
+          {date ? format(date, "d 'DE' MMMM", { locale: ptBR }).toUpperCase() : 'ESCOLHA UM DIA'}
         </h2>
-        
+
         {eventosDoDia.length === 0 ? (
-          <div className="text-center py-8 glass rounded-2xl border border-border/50">
-            <p className="text-muted-foreground">Nenhum evento programado para este dia.</p>
+          <div className="text-center py-12 border border-border">
+            <p className="label-mono text-[11px] text-muted-foreground">NADA ROLANDO POR AQUI</p>
           </div>
         ) : (
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
             {eventosDoDia.map((evento) => (
               <EventCard
                 key={evento.id}
